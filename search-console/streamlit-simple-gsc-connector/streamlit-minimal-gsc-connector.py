@@ -242,20 +242,41 @@ def property_change():
 def show_dataframe(report):
     """
     Shows a preview of the first 100 rows of the report DataFrame in an expandable section.
+    Applies proper formatting to numeric columns.
     """
+    # Create a copy to avoid modifying the original dataframe
+    formatted_report = report.copy()
+    
+    # Format Average Position to 2 decimal places
+    if 'Avg Pos' in formatted_report.columns:
+        formatted_report['Avg Pos'] = formatted_report['Avg Pos'].round(2)
+    
+    # Format CTR as percentage with 2 decimal places
+    if 'URL CTR' in formatted_report.columns:
+        formatted_report['URL CTR'] = formatted_report['URL CTR'].map('{:.2%}'.format)
+    
     with st.expander("Preview the First 100 Rows"):
-        st.dataframe(report.head(DF_PREVIEW_ROWS))
+        st.dataframe(formatted_report.head(DF_PREVIEW_ROWS))
 
 
 def download_csv_link(report):
     """
     Generates and displays a download link for the report DataFrame in CSV format.
+    Ensures proper formatting is maintained in the exported CSV.
     """
+    # Create a copy and apply formatting before export
+    export_df = report.copy()
+    
+    if 'Avg Pos' in export_df.columns:
+        export_df['Avg Pos'] = export_df['Avg Pos'].round(2)
+    
+    if 'URL CTR' in export_df.columns:
+        export_df['URL CTR'] = export_df['URL CTR'].map('{:.4f}'.format)  # Store as decimal for CSV
 
     def to_csv(df):
         return df.to_csv(index=False, encoding='utf-8-sig')
 
-    csv = to_csv(report)
+    csv = to_csv(export_df)
     b64_csv = base64.b64encode(csv.encode()).decode()
     href = f'<a href="data:file/csv;base64,{b64_csv}" download="search_console_data.csv">Download CSV File</a>'
     st.markdown(href, unsafe_allow_html=True)
