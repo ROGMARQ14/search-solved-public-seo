@@ -1,7 +1,5 @@
-streamlit==1.22.0
-google-auth-oauthlib==1.0.0
-google-api-python-client==2.80.0
+streamlit==1.21.0
 pandas==1.5.3
+google-api-python-client==2.70.0
+google-auth-oauthlib==0.8.0
 searchconsole==0.0.4
-streamlit-elements==0.1.0
-protobuf==3.20.0
