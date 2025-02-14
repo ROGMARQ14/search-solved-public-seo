@@ -1,5 +1,6 @@
-google_auth_oauthlib==1.2.0
-google-api-python-client==2.111.0
-searchconsole==0.0.4
-pandas==2.1.4
-streamlit-elements==0.0.2
+streamlit==1.31.1
+google-auth-oauthlib==1.2.0
+google-api-python-client==2.116.0
+pandas==2.2.0
+searchconsole==3.0.0
+streamlit-elements==0.1.0
