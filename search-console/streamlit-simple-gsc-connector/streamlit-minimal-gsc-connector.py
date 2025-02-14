@@ -4,7 +4,7 @@ import base64
 
 # Related third-party imports
 import streamlit as st
-from streamlit_elements import Elements
+# from streamlit_elements import Elements  # Temporarily disabled
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 import pandas as pd
